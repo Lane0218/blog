@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>吴恩达《机器学习》课程笔记 - Lane&#039;s Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Lane&#039;s Blog"><meta name="msapplication-TileImage" content="/img/favicon.jpg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Lane&#039;s Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="包括监督学习、高级机器学习算法、无监督学习、推荐算法、强化学习等内容。"><meta property="og:type" content="blog"><meta property="og:title" content="吴恩达《机器学习》课程笔记"><meta property="og:url" content="https://lane0218.top/2024/10/13/%E5%90%B4%E6%81%A9%E8%BE%BE%E3%80%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8B%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"><meta property="og:site_name" content="Lane&#039;s Blog"><meta property="og:description" content="包括监督学习、高级机器学习算法、无监督学习、推荐算法、强化学习等内容。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131053183.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408211705430.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408212038473.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408261717829.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408261718187.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408261957843.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271459148.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271506695.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271507456.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271659912.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271715710.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292103368.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292106805.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292118898.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292119257.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409010943264.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409011134643.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252158114.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252158699.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252158467.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409021648582.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409122119990.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409122125191.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409122133513.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409130000609.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409132049697.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252007700.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252016083.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261933516.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261936763.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261936251.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261949953.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261954129.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410121700836.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410121707218.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410121711201.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410122049381.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410122102102.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410122121866.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131044524.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131046585.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131047200.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131048129.png"><meta property="og:image" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131052845.png"><meta property="article:published_time" content="2024-10-13T04:25:15.000Z"><meta property="article:modified_time" content="2024-10-13T04:28:11.609Z"><meta property="article:author" content="Lane"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131053183.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://lane0218.top/2024/10/13/%E5%90%B4%E6%81%A9%E8%BE%BE%E3%80%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8B%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"},"headline":"吴恩达《机器学习》课程笔记","image":["https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131053183.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408211705430.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408212038473.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408261717829.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408261718187.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408261957843.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271459148.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271506695.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271507456.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271659912.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271715710.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292103368.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292106805.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292118898.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292119257.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409010943264.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409011134643.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252158114.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252158699.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252158467.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409021648582.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409122119990.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409122125191.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409122133513.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409130000609.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409132049697.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252007700.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252016083.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261933516.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261936763.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261936251.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261949953.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261954129.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410121700836.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410121707218.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410121711201.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410122049381.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410122102102.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410122121866.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131044524.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131046585.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131047200.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131048129.png","https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131052845.png"],"datePublished":"2024-10-13T04:25:15.000Z","dateModified":"2024-10-13T04:28:11.609Z","author":{"@type":"Person","name":"Lane"},"publisher":{"@type":"Organization","name":"Lane's Blog","logo":{"@type":"ImageObject","url":"https://lane0218.top/img/logo2.png"}},"description":"包括监督学习、高级机器学习算法、无监督学习、推荐算法、强化学习等内容。"}</script><link rel="canonical" href="https://lane0218.top/2024/10/13/%E5%90%B4%E6%81%A9%E8%BE%BE%E3%80%8A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%8B%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"><link rel="icon" href="/img/favicon.jpg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?e575629a87ca945d972b46bda49d39d0";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><meta name="msvalidate.01" content="52158C8892738F53D8FF30CC87BC933A"><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo2.png" alt="Lane&#039;s Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/Lane0218/blog"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-10-13T04:25:15.000Z" title="2024/10/13 12:25:15">2024-10-13</time>发表</span><span class="level-item"><time dateTime="2024-10-13T04:28:11.609Z" title="2024/10/13 12:28:11">2024-10-13</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a><span> / </span><a class="link-muted" href="/categories/%E7%AC%94%E8%AE%B0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span><span class="level-item">17 分钟读完 (大约2508个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">吴恩达《机器学习》课程笔记</h1><div class="content"><h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131053183.png" alt="image.png|450"></p>
+<h1 id="第一课-机器学习"><a href="#第一课-机器学习" class="headerlink" title="第一课 机器学习"></a>第一课 机器学习</h1><ul>
+<li>监督学习：Learns from being given “right answers”<ul>
+<li>回归（Regression）：预测房价（有无数个可能的输出）<ul>
+<li>线性回归（linear regression）<ul>
+<li>代价函数（Cost）：平方误差公式（Squared error cost function）<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408211705430.png" alt="image.png|175"></li>
+</ul>
+</li>
+<li>梯度下降算法<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408212038473.png" alt="image.png|250"></li>
+<li>$\alpha$ ：学习率（learning rate），梯度下降的步长<ul>
+<li>太小：收敛太慢</li>
+<li>太大：过冲（overshoot），不收敛（fail to converge），发散（diverge）</li>
+</ul>
+</li>
+<li>注意多变量要同步更新</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分类（Classification）：预测肿块是良性还是恶性的（只有几个可能的输出）<ul>
+<li>逻辑回归（logistic regression）<ul>
+<li>计算公式<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408261717829.png" alt="image.png|175"></li>
+</ul>
+</li>
+<li>损失函数（Loss）：平方误差损失函数不适合分类任务<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408261718187.png" alt="image.png|325"></li>
+</ul>
+</li>
+<li>梯度下降<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408261957843.png" alt="image.png|250"></li>
+</ul>
+</li>
+<li>过拟合（overfit）解决方案<ul>
+<li>增加数据条数</li>
+<li>选取特征子集（Feature selection）</li>
+<li>降低参数大小（[[#^57f440|正则化]]，Regularization）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>无监督学习：Data only comes with inputs x, but not output labels y. Algorithm has to find structure in the data.<ul>
+<li>聚类（Clustering）：Group similar data points together.</li>
+<li>降维（Dimensionality reduction）：Compress data using fewer numbers.</li>
+<li>异常检测（Anomaly detection）：Find unusual data points.</li>
+</ul>
+</li>
+<li>正则化 ^57f440<ul>
+<li>cost函数<ul>
+<li>线性回归<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271459148.png" alt="image.png|300"> </li>
+</ul>
+</li>
+<li>逻辑回归<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271506695.png" alt="image.png|475"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>梯度下降<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271507456.png" alt="image.png|275"><h1 id="第二课-高级学习算法"><a href="#第二课-高级学习算法" class="headerlink" title="第二课 高级学习算法"></a>第二课 高级学习算法</h1></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>神经网络<ul>
+<li>多层感知机（MLP，Multilayer Perceptron）<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271659912.png" alt="image.png|275"></li>
+</ul>
+</li>
+<li>前向传播（Forward prop）<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408271715710.png" alt="image.png|450"></li>
+</ul>
+</li>
+<li>模型训练步骤<ul>
+<li><ol>
+<li>定义模型（确定[[#^f85843|激活函数]]，指明如何根据x和参数w、b算出输出）</li>
+</ol>
+</li>
+<li><ol>
+<li>指明loss和cost</li>
+</ol>
+</li>
+<li><ol>
+<li>根据训练集进行训练，以最小化cost</li>
+</ol>
+</li>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292103368.png" alt="image.png|300"></li>
+</ul>
+</li>
+<li>激活函数 ^f85843<ul>
+<li>Linear：输出可以为+或-，回归预测</li>
+<li>Sigmoid：输出为0/1，二分类</li>
+<li>ReLU：输出为0或+，回归预测</li>
+<li>Softmax：输出为不同类别的概率，[[#^b6ef21|多分类]]</li>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292106805.png" alt="image.png|425"></li>
+</ul>
+</li>
+<li>多分类问题（Multiclass Classification） ^b6ef21<ul>
+<li>0-9手写数字识别</li>
+<li>激活函数：Softmax<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292118898.png" alt="image.png|200"></li>
+</ul>
+</li>
+<li>loss函数：交叉熵损失函数（cross-entropy loss function）<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202408292119257.png" alt="image.png|275"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多输出分类（Multi-label Classification）<ul>
+<li>同时识别图片里是否有小车，是否有人，是否有卡车</li>
+</ul>
+</li>
+<li>高级优化算法：Adam<ul>
+<li>在编译时添加参数，可实现自动调节学习率</li>
+</ul>
+</li>
+<li>模型评估<ul>
+<li>训练集：训练模型</li>
+<li>交叉验证集：选择模型</li>
+<li>测试集：测试模型</li>
+</ul>
+</li>
+<li>偏差和方差<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409010943264.png" alt="image.png|375"></li>
+<li>解决方案<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409011134643.png" alt="image.png|350"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>准确率与召回率<ul>
+<li>准确率越高，越不容易出现假阳性（疑罪从无）</li>
+<li>召回率越高，越不容易出现假阴性（宁可错杀一千）</li>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252158114.png" alt="image.png|325"></li>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252158699.png" alt="image.png|200"></li>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252158467.png" alt="image.png|200"></li>
+<li>F1 score<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409021648582.png" alt="image.png|275"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>决策树<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409122119990.png" alt="image.png|350"></li>
+<li>熵函数：用于评价数据集的纯度<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409122125191.png" alt="image.png|450"></li>
+</ul>
+</li>
+<li>reduction of entropy （降低熵）= information gain（信息增益）<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409122133513.png" alt="image.png|400"></li>
+</ul>
+</li>
+<li>对于多分类，可采用独热码将一个特征划分为多个特征</li>
+<li>对于连续取值的特征，以10个样本为例，尝试9个中间点把样本分成两个部分，选择信息增益最高的那个中间点作为分界点</li>
+</ul>
+</li>
+<li>回归树<ul>
+<li>预测值为该数据集中的平均值</li>
+<li>评价指标为加权方差降低值（类比信息增益）</li>
+</ul>
+</li>
+<li>随机森林<ul>
+<li>每次从训练集中随机有放回抽样选取一定数量的样本作为训练集，从而训练出多棵树<ul>
+<li>同样的样本训练出来的树一定相同</li>
+</ul>
+</li>
+<li>在训练每一棵树时，随机选取特征集的子集进行训练（多用于特征值较多时）<ul>
+<li>同样的样本能训练出不同的树</li>
+</ul>
+</li>
+<li>森林里每棵树进行投票决定最终结果</li>
+</ul>
+</li>
+<li>XGBoost<ul>
+<li>和随机森林的区别主要是在选取样本组成训练集时<ul>
+<li>But instead of picking from all examples with equal (1/m) probability, make it more likely to pick examples that the previously trained trees misclassify</li>
+<li>即有更大的概率选择在已训练出的树中被错误分类的样本</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>决策树和神经网络的特点<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409130000609.png" alt="image.png|400"><h1 id="第三课-无监督学习、推荐系统和强化学习"><a href="#第三课-无监督学习、推荐系统和强化学习" class="headerlink" title="第三课 无监督学习、推荐系统和强化学习"></a>第三课 无监督学习、推荐系统和强化学习</h1></li>
+</ul>
+</li>
+<li>K-Means<ul>
+<li>直观思路<ul>
+<li>随机选取K个初始中心，将样本点分配到距离最近的中心</li>
+<li>将中心移动到该类的中心，重复上述步骤</li>
+</ul>
+</li>
+<li>具体思路<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409132049697.png" alt="image.png|475"></li>
+</ul>
+</li>
+<li>初始化聚类中心<ul>
+<li>多次重复随机初始化并计算收敛时的J，选取J最小的一次结果</li>
+</ul>
+</li>
+<li>应用：图片压缩（如把所有颜色聚类为16种颜色，每个像素的颜色只需要用0-15代替即可）</li>
+</ul>
+</li>
+<li>异常检测<ul>
+<li>先利用训练集中的数据对每一个特征值拟合出正态分布函数，概率函数p为各特征值正态分布函数之积；然后计算测试数据对应的函数值，以一较小值 $\varepsilon$ 为界<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252007700.png" alt="image.png|450"></li>
+</ul>
+</li>
+<li>如何确定$\varepsilon$<ul>
+<li>异常数据较多时可以设置交叉验证集和测试集，异常数据较少时可以只设置交叉验证集</li>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409252016083.png" alt="image.png|450"></li>
+</ul>
+</li>
+<li>异常检测和监督学习的比较<ul>
+<li>异常检测更倾向于检测异常样本少且千奇百怪的异常（因为它是学习正常的特征，所有偏离正常的都被认定为异常）</li>
+<li>监督学习更倾向于检测阳性样本多且阳性样本的特征清晰明确（因为它是学习阳性样本的特征来预测的）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>推荐系统（根据电影的特征预测用户对电影的评分）<ul>
+<li>预测评分（使用特征）<ul>
+<li>已知电影特征值，调节权重，预测用户对电影的评分<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261933516.png" alt="image.png|425"></li>
+</ul>
+</li>
+<li>Cost Function<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261936763.png" alt="image.png|425"></li>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261936251.png" alt="image.png|425"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>预测特征值<ul>
+<li>已知权重和用户对电影的评分，预测电影的特征值<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261949953.png" alt="image.png|425"></li>
+</ul>
+</li>
+<li>Cost Function<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261954129.png" alt="image.png|425"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>协同过滤算法（上述二者的结合）：根据与你评分相近的用户的评分向你推荐电影<pre><code>  - ![image.png|425](https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409261955674.png)
+</code></pre></li>
+<li>内容过滤算法：根据用户和电影的特征向用户推荐物品，找到合适的匹配<ul>
+<li>分别根据用户和电影的特征得到$x_u$和$x_m$两个向量<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410121700836.png" alt="image.png|450"></li>
+</ul>
+</li>
+<li>将$x_u$和$x_m$通过神经网络转化为$v_u$和$v_m$，再将二者点乘得到预测值<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410121707218.png" alt="image.png|450"></li>
+</ul>
+</li>
+<li>训练模型时可以把用户网络和电影网络的损失函数合并在一起<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410121711201.png" alt="image.png|475"></li>
+</ul>
+</li>
+<li>拓展：如何从大量电影中进行推荐？<ul>
+<li>生成检索列表<ul>
+<li>列出用户可能感兴趣的电影<ul>
+<li>根据用户最近看过的10部电影，每一部找10部最相似的电影<ul>
+<li>即$||v^{k} _m-v^{i} _m||^2$最小的电影</li>
+</ul>
+</li>
+<li>根据用户最常看的3个类别，选出其中每个类别的top10电影</li>
+<li>根据用户所在国家，找出top20电影</li>
+</ul>
+</li>
+<li>去重、去掉用户已观看的</li>
+</ul>
+</li>
+<li>排序<ul>
+<li>提前算好每一部电影的$v_m$，然后根据用户的特征计算$v_u$，从而求出预测值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>强化学习<ul>
+<li>案例：Mars rover example（离散）<ul>
+<li>Return：折扣因子$\gamma$ <ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410122049381.png" alt="image.png|325"></li>
+<li>马尔可夫决策过程（MDP）：未来只取决于目前的状态，只与位置有关，与过程无关</li>
+</ul>
+</li>
+<li>状态值函数：Q(s,a)<ul>
+<li>Q实际上是action完了之后，你能拿到的最多的奖励（之后还是会按奖励最多的方案走）</li>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410122102102.png" alt="image.png|375"></li>
+<li>贝尔曼方程（Bellman Equation）<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410122121866.png" alt="image.png|375"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>案例：Lunar Lander Problem（连续）<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131044524.png" alt="image.png|400"></li>
+<li>学习算法：DQN方法（Deel learning for Q）<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131046585.png" alt="image.png|425"></li>
+</ul>
+</li>
+<li>改进：同时输出四个Q值<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131047200.png" alt="image.png|475"></li>
+</ul>
+</li>
+<li>改进：$\epsilon$贪婪策略（有点类似于模拟退火的思想，以概率接受一个不是最优的策略）<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131048129.png" alt="image.png"></li>
+</ul>
+</li>
+<li>改进：Mini-batch and soft update<ul>
+<li>Mini-batch：每次梯度下降，可以不必计算那么多数据，可以每次循环选择一个小的数据量，依次往后循环完（加快算法）</li>
+<li>Soft update：更好收敛<ul>
+<li><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202410131052845.png" alt="image.png|225"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>吴恩达《机器学习》课程笔记</p><p><a href="https://lane0218.top/2024/10/13/吴恩达《机器学习》课程笔记/">https://lane0218.top/2024/10/13/吴恩达《机器学习》课程笔记/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Lane</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2024-10-13</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2024-10-13</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409172109174.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409172109261.jpg" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/10/08/UML%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span class="level-item">UML学习笔记</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://laneljc-1321736255.cos.ap-nanjing.myqcloud.com/pic/202409172132030.jpg" alt="Lane"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Lane</p><p class="is-size-6 is-block">laneljc@qq.com</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>湖南长沙</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">5</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">6</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://blog.csdn.net/Lane0218" target="_blank" rel="me noopener">关注我</a></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%AE%9E%E9%AA%8C/"><span class="level-start"><span class="level-item">实验</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E5%AE%9E%E9%AA%8C/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">数据结构与算法</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">笔记</span></span><span class="level-end"><span class="level-item tag">3</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">数据结构与算法</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="level-start"><span class="level-item">机器学习</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AC%94%E8%AE%B0/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/"><span class="level-start"><span class="level-item">软件工程</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/10/"><span class="level-start"><span class="level-item">十月 2024</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/09/"><span class="level-start"><span class="level-item">九月 2024</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://monica4125.github.io/" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">monica&#039;s blog</span></span><span class="level-right"><span class="level-item tag">monica4125.github.io</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Overview"><span class="level-left"><span class="level-item">1</span><span class="level-item">Overview</span></span></a></li><li><a class="level is-mobile" href="#第一课-机器学习"><span class="level-left"><span class="level-item">2</span><span class="level-item">第一课 机器学习</span></span></a></li><li><a class="level is-mobile" href="#第二课-高级学习算法"><span class="level-left"><span class="level-item">3</span><span class="level-item">第二课 高级学习算法</span></span></a></li><li><a class="level is-mobile" href="#第三课-无监督学习、推荐系统和强化学习"><span class="level-left"><span class="level-item">4</span><span class="level-item">第三课 无监督学习、推荐系统和强化学习</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo2.png" alt="Lane&#039;s Blog" height="28"></a><p class="is-size-7"><span>&copy; 2024 Lane</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/Lane0218/blog"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
